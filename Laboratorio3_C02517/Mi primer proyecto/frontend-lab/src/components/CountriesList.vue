@@ -20,7 +20,7 @@ is-fullwidth"
             <td>{{country.language}}</td> 
             <td> 
                 <button class="btn btn-secondary btn-sm">Editar</button> 
-                <button class="btn btn-danger btn-sm">Eliminar</button> 
+                <button class="btn btn-danger btn-sm" v-on:click="removeCountry(index)">Eliminar</button> 
             </td> 
         </tr> 
     </tbody> 
@@ -41,6 +41,12 @@ is-fullwidth"
                 { name: "Alemania", continent: "Europa", language: "Alemán" }, 
                 ], 
             }; 
+        },
+        methods: {
+            removeCountry(index) {
+                this.countries.splice(index, 1);
+                // de https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+            }
         },
     }
 </script>
