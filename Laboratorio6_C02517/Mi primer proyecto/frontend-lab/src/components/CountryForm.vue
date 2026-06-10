@@ -2,6 +2,13 @@
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow" style="max-width: 400px; width: 100%">
             <h3 class="text-center">Formulario de creación de países</h3>
+            <div
+                v-if="successMessage"
+                id="success-message"
+                class="success-message"
+            >
+                {{ successMessage }}
+            </div>
             <form @submit.prevent="saveCountry">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
@@ -56,6 +63,7 @@ export default {
     data () {
         return {
             formData: { Name: "", Continent: "", Language: "" },
+            successMessage: ""
         };
     },
     methods: {
@@ -67,9 +75,12 @@ export default {
                     Continent: this.formData.Continent,
                     Language: this.formData.Language,
                 })
-                .then(function (response) {
+                .then((response) => {
                     console.log(response);
-                    window.location.href = "/";
+                    this.successMessage = "País creado correctamente";
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 2000);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -79,4 +90,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+</style>
